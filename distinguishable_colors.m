@@ -1,3 +1,4 @@
+% Copyright 2010-2011 by Timothy E. Holy
 function colors = distinguishable_colors(n_colors,bg,func)
 % DISTINGUISHABLE_COLORS: pick colors that are maximally perceptually distinct
 %

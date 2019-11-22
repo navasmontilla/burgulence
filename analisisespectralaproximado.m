@@ -21,8 +21,8 @@ a             = 1.0;
 %   15: RK3   - WENO7
 %   16: FOU
 scheme          = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16];
-order           = [1 3 5 7 9 3 5 7 9  3  5  7  3  5  7  1];  % El orden de la discretizaciÛn espacial
-spatialScheme   = [1 3 5 7 9 3 5 7 9  1  1  1  2  2  2  0];  % El 1 y el 2 de las cuatro ˙ltimas posiciones se corresponden con los grados 3 y 5 del UWC y del WENO en el cÛdigo semidsicreto.
+order           = [1 3 5 7 9 3 5 7 9  3  5  7  3  5  7  1];  % El orden de la discretizaci√≥n espacial
+spatialScheme   = [1 3 5 7 9 3 5 7 9  1  1  1  2  2  2  0];  % El 1 y el 2 de las cuatro √∫ltimas posiciones se corresponden con los grados 3 y 5 del UWC y del WENO en el c√≥digo semidsicreto.
 reconstruction  = [4 4 4 4 4 1 1 1 1  0  0  0  0  0  0  0];  % Tipo de reconstruccion: 1-WENO SHU, 2-WENO PW, 3-WENO Z, 4-OPTIMAL WEIGHTS (UWC)
 aderDegree      = [1 2 3 4 5 2 3 4 5  0  0  0  0  0  0  0];
 TMAX            = 0.1;
@@ -107,29 +107,29 @@ for jj=10:10
             u  = A(:,2);
             ui = B(:,2);
 
-            % Transformada r·pida de Fourier de las CI
+            % Transformada r√°pida de Fourier de las CI
             L1  = length(ui);    % Length of signal
             ts1 = (0:L1-1)*DX(n);   % space vector
             Ui  = fft(ui);       % Fourier transform
 
-            % NormalizaciÛn de los datos
+            % Normalizaci√≥n de los datos
             Ui_bar         = zeros(L1/2+1,1);
             Ui_bar(2:L1/2) = 2*real(Ui(2:L1/2))/NCELLS + 1i*2*imag(Ui(2:L1/2))/NCELLS;
             Ui_bar(1)      = real(Ui(1))/NCELLS        + 1i*2*imag(Ui(1))/NCELLS;
             Ui_bar(L1/2+1) = real(Ui(L1/2+1))/NCELLS   + 1i*2*real(Ui(L1/2+1))/NCELLS;
-            % M·xima componente
+            % M√°xima componente
             idx  = find(abs(Ui_bar)>0.01);
             imin = min(idx);
 
-            % Transformada r·pida de Fourier
+            % Transformada r√°pida de Fourier
             U = fft(u);        % Fourier transform
-            % NormalizaciÛn de los datos
+            % Normalizaci√≥n de los datos
             U_bar         = zeros(L1/2+1,1);
             U_bar(2:L1/2) = 2*real(U(2:L1/2))/NCELLS + 1i*2*imag(U(2:L1/2))/NCELLS;
             U_bar(1)      = real(U(1))/NCELLS        + 1i*2*imag(U(1))/NCELLS;
             U_bar(L1/2+1) = real(U(L1/2+1))/NCELLS   + 1i*2*real(U(L1/2+1))/NCELLS;
 
-            % C·lculo de la longitud de onda modificada
+            % C√°lculo de la longitud de onda modificada
             phi(n)   = 1i*log(U_bar(imin)/Ui_bar(imin))/(CFL(mm));
             xi(n)    = real(phi(n));
             eta(n)   = imag(phi(n));
@@ -150,7 +150,7 @@ for jj=10:10
             end
 
         end
-        % RepresentaciÛn de dispersiÛn y difusiÛn semidiscreta
+        % Representaci√≥n de dispersi√≥n y difusi√≥n semidiscreta
 
         ct1 	= 0;
         xi_fix 	= xi;
@@ -170,7 +170,7 @@ for jj=10:10
             sgn1 	= der2(kk)*der2(kk+1); %sera -1 si es el pico central
             sgn2 	= der2(kk)*der2(kk-1); %sera -1 si es el pico central
             der2(kk-1);
-            if dif_dos<tol*abs(der2(kk-1)) && sgn_dos>0 && sgn1<0 && sgn2<0 %que la diferencia entre picos a los lados sea pequeÒa
+            if dif_dos<tol*abs(der2(kk-1)) && sgn_dos>0 && sgn1<0 && sgn2<0 %que la diferencia entre picos a los lados sea peque√±a
                 xi_fix (kk) = 0.5*(xi(kk+1)  +  xi(kk-1) );
                 mag_fix(kk) = 0.5*(mag(kk+1) +  mag(kk-1));
                 eta_fix(kk) = 0.5*(eta(kk+1) +  eta(kk-1));
@@ -198,13 +198,13 @@ for jj=10:10
             sgn1=der2(kk)*der2(kk+1); %sera -1 si es el pico central
             sgn2=der2(kk)*der2(kk-1); %sera -1 si es el pico central
             der2(kk-1);
-            if dif_dos<tol*abs(der2(kk-1)) && sgn_dos>0 && sgn1<0 && sgn2<0 %que la diferencia entre picos a los lados sea pequeÒa
+            if dif_dos<tol*abs(der2(kk-1)) && sgn_dos>0 && sgn1<0 && sgn2<0 %que la diferencia entre picos a los lados sea peque√±a
                 im_fix (kk) =0.5*(im(kk+1)  +  im(kk-1) );
                 ct1=ct1+1;
             end
         end
 
-        G_num_fix=(xi_fix+(im_fix)*1i)./beta; %ojo si has aÒadido el "cero", aquÌ no se tiene en cuenta.
+        G_num_fix=(xi_fix+(im_fix)*1i)./beta; %ojo si has a√±adido el "cero", aqu√≠ no se tiene en cuenta.
         G_exact_1st=(sin(beta)+1i*(cos(beta)-1))./beta;
 
         nc=100;
@@ -242,10 +242,10 @@ for jj=10:10
         end
         G_int2=2*G_int;
         if mm == 1
-            rCoef(jj)=(2*pi/G_int2); %este es el indicador de la pagina 78 del paper (2pi en la fÛrmula va dividiendo!!)
+            rCoef(jj)=(2*pi/G_int2); %este es el indicador de la pagina 78 del paper (2pi en la f√≥rmula va dividiendo!!)
         end
             
-        % AÒadir el punto (0,0)
+        % A√±adir el punto (0,0)
         beta_plot(1)                      = 0.0;
         beta_plot(2:length(beta)+1)       = beta(1:length(beta));
         xi_plot(1)                        = 0.0;

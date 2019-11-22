@@ -214,7 +214,7 @@ plotpolar(betaVector,M,titulo,tituloFigura,24)
 plotcombined(betaVector,semi_M,'semidiscret','A',25)
 plotcombined(betaVector,semi_betaMod,'semidiscret','F',26)
 plotmaximum(CFLVector,Mmax,'CFL',27)
-%% Estudio de cómo afecta el paso temporal - FOU
+%% Estudio de cÃ³mo afecta el paso temporal - FOU
 for i = 1:11
     K(i)         = floor(1/nu(i));
     nuMod(i)     = (1-K(i)*nu(i))/1; 
@@ -226,7 +226,7 @@ titulo = 'FOU';
 tituloFigura = 'FOU_DT';
 plotnotpolar(betaVector,MTotal,titulo,tituloFigura,'A',28);
 plotnotpolar(betaVector,MTotal,titulo,tituloFigura,'Z',29);
-% Representacion del número de pasos temporales necesarios
+% Representacion del nÃºmero de pasos temporales necesarios
 grafica = figure(30)
 bar(nu,log10(K));
 hold on;
@@ -241,7 +241,7 @@ for i1=1:numel(K)
 end
 saveas(grafica,strcat(tituloFigura, '_pasosTemporales'),'epsc')
 hold off;
-%% Estudio de cómo afecta el paso temporal - UCW3-ADER3
+%% Estudio de cÃ³mo afecta el paso temporal - UCW3-ADER3
 for i = 1:11
     K(i)         = floor(1/nu(i));
     nuMod(i)     = (1-K(i)*nu(i))/1; 
@@ -253,7 +253,7 @@ titulo = 'UWC3-ADER3';
 tituloFigura = 'UWC3_DT-ADER3';
 plotnotpolar(betaVector,MTotal,titulo,tituloFigura,'A',31);
 plotnotpolar(betaVector,MTotal,titulo,tituloFigura,'Z',32);
-% Representacion del número de pasos temporales necesarios
+% Representacion del nÃºmero de pasos temporales necesarios
 grafica = figure(33)
 bar(nu,log10(K));
 hold on;
@@ -269,7 +269,7 @@ for i1=1:numel(K)
 end
 saveas(grafica,strcat(tituloFigura, '_pasosTemporales'),'epsc')
 hold off;
-%% Estudio de cómo afecta el paso temporal - UCW3-RK3
+%% Estudio de cÃ³mo afecta el paso temporal - UCW3-RK3
 for i = 1:11
     K(i)         = floor(1/nu(i));
     nuMod(i)     = (1-K(i)*nu(i))/1; 
@@ -281,7 +281,7 @@ titulo = 'UWC3-RK3';
 tituloFigura = 'UWC3_DT-RK3';
 plotnotpolar(betaVector,MTotal,titulo,tituloFigura,'A',34);
 plotnotpolar(betaVector,MTotal,titulo,tituloFigura,'Z',35);
-% Representacion del número de pasos temporales necesarios
+% Representacion del nÃºmero de pasos temporales necesarios
 grafica = figure(36)
 bar(nu,log10(K));
 hold on;
